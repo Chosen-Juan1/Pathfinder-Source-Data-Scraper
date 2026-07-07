@@ -13,6 +13,7 @@ def tabulateSpells(baseLink, selector):
         spellHTMLPage = requests.get(link)
         prettyPage = BeautifulSoup(spellHTMLPage.text,'html.parser')
         details = getSpellDetails(prettyPage, link)
+        # print()
         try:
             spellTable["NAME"].append(details["NAME"])
         except:
@@ -31,6 +32,7 @@ def tabulateSpells(baseLink, selector):
         except:
             spellTable["DESCRIPTION"].append(None)
         spellTable["LINK"].append(details["LINK"])
+    return spellTable
 
 
 if __name__ == "__main__":

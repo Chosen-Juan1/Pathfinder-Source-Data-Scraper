@@ -22,7 +22,7 @@ def getSpellDetails(beautySoupedPage, link):
         if(tags == 1): #this is to catch the info about who learns the spell, which is not under a section like the other info
             sections["LEARNED BY"] = listRes[tags].get_text()
             continue
-        if(listRes[tags].get_text() == "Join Our Discord!" or "Editor’s Note" in listRes[tags].get_text()):
+        if(listRes[tags].get_text() == "Join Our Discord!" or "Editor’s Note" in listRes[tags].get_text() or "Note:" in listRes[tags].get_text()):
             break
         # if("Editor’s Note" in listRes[tags].get_text()):
         #     continue
@@ -48,7 +48,7 @@ def getSpellDetails(beautySoupedPage, link):
             section = "DESCRIPTION"
             inputNow = True
     sections["LINK"] = link
-    # print("\n", sections)
+    print("\n", sections)
     return sections
 
 if __name__ == "__main__":
