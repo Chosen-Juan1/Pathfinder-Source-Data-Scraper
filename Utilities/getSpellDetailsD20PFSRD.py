@@ -19,6 +19,9 @@ def getSpellDetails(beautySoupedPage, link):
     spaceFlag = True #can't figure out how to stop the first bit from appearing
     for tags in range(0,len(listRes)):
         # print(listRes[tags].get_text())
+        if(tags == 1): #this is to catch the info about who learns the spell, which is not under a section like the other info
+            sections["LEARNED BY"] = listRes[tags].get_text()
+            continue
         if(listRes[tags].get_text() == "Join Our Discord!" or "Editor’s Note" in listRes[tags].get_text()):
             break
         # if("Editor’s Note" in listRes[tags].get_text()):
@@ -45,15 +48,17 @@ def getSpellDetails(beautySoupedPage, link):
             section = "DESCRIPTION"
             inputNow = True
     sections["LINK"] = link
-    print("\n", sections)
+    # print("\n", sections)
     return sections
 
 if __name__ == "__main__":
     import requests
-    link = "https://www.d20pfsrd.com/magic/all-spells/m/magic-missile/"
+    # link = "https://www.d20pfsrd.com/magic/all-spells/m/magic-missile/"
+    link = " https://www.d20pfsrd.com/magic/3rd-party-spells/4-winds-fantasy-gaming-3rd-party-spells/analyze-fertility/"
+
     result = requests.get(link)
     result = BeautifulSoup(result.text,'html.parser')
 
     # listOfLinks = getLinks(selector, beautyLink)
     # print(listOfLinks)
-    getSpellDetails(result, link)
+    print(getSpellDetails(result, link))
